@@ -1,0 +1,25 @@
+# IDE settings
+.idea/
+.vscode/
+
+# Local Codex metadata
+.codex
+
+# Python cache and bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Project runtime logs
+logs/
+log.txt
+
+# Common local environment files
+.env
+.venv/
+venv/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
