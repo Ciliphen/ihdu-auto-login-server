@@ -2,7 +2,7 @@
 
 本项目用于登录杭州电子科技大学 iHDU 校园网，并支持在 Linux/macOS 和 Windows 下通过定时任务自动检测网络状态、按需认证。
 
-项目包含三个主要入口：
+项目包含以下主要入口和辅助文件：
 
 - `login.py`：执行一次校园网登录。
 - `run.sh`：Linux/macOS 定时任务入口，适合配合 `cron` 使用。
@@ -17,7 +17,7 @@
 ├── script/         # 登录逻辑实现
 ├── login.py        # 单次登录入口
 ├── run.sh          # Linux/macOS 定时任务入口
-├── run.ps1         # Windows 定时任务入口
+├── run.ps1         # Windows PowerShell 手动入口
 ├── run.bat         # Windows 批处理入口
 ├── ihdu-auto-login.xml # Windows 任务计划程序导入模板
 └── logs/           # 按天生成的日志目录
@@ -28,7 +28,7 @@
 - Python 3
 - `requests`
 - `curl`，仅 `run.sh` 需要
-- PowerShell，Windows 自带即可运行 `run.ps1`
+- PowerShell，Windows 自带即可运行 `run.ps1`，`run.bat` 也会调用它
 
 如果缺少 Python 依赖，可以安装：
 
@@ -182,7 +182,7 @@ D:\Nonsynchronous\ihdu-auto-login\run.bat
 4. 检查“操作”中的程序路径是否已经指向你的 `run.bat`。
 5. 根据需要调整触发器时间、运行账户和是否隐藏运行。
 
-当前 XML 模板包含两个触发器：开机后延迟 30 秒执行一次，以及每天 05:00 执行一次。你可以按自己的网络环境修改。
+当前 XML 模板包含一个触发器：每天 05:00 执行一次。你可以按自己的网络环境修改。
 
 ## 日志说明
 
@@ -197,7 +197,7 @@ logs/2026-04-20.log
 
 - 每天生成一个新的日志文件。
 - 自动删除 30 天前的旧日志。
-- `run.sh` 和 `run.ps1` 都会自行写日志，定时任务中无需再额外使用重定向。
+- `run.sh` 和 `run.ps1` 都会自行写日志，`run.bat` 会调用 `run.ps1` 写日志，定时任务中无需再额外使用重定向。
 
 ## 注意事项
 
